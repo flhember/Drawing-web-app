@@ -16,8 +16,7 @@ function Drawing() {
     const [sizeD, setSizeD] = useState(3);
     const [posX, setPosX] = useState(0);
     const [posY, setPosY] = useState(0);
-    //const ENDPOINT = 'https://expratico.netlify.app/';
-    const ENDPOINT = 'http://localhost:5000/';
+    const ENDPOINT = 'https://expratico.herokuapp.com/';
 
     useEffect(() => {
         socket = io(ENDPOINT);

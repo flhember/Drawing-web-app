@@ -3,6 +3,10 @@
   padding: 0px;
 }
 
+html,body {  
+  overflow:hidden;  
+}
+
 .App {
   text-align: center;
   font-family: Tahoma, Geneva, sans-serif;
@@ -16,7 +20,7 @@
 
 .monCadre {
   margin: 0 auto;
-  border: 4px solid  #BADA55;
+  border: px solid  #BADA55;
   box-sizing: border-box;
   position: static;
   cursor: crosshair;

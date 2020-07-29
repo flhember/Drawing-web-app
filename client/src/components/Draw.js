@@ -17,6 +17,7 @@ function Drawing() {
     const [posX, setPosX] = useState(0);
     const [posY, setPosY] = useState(0);
     const ENDPOINT = 'https://expratico.herokuapp.com/';
+    //const ENDPOINT = 'https://http://localhost:3000/';
 
     useEffect(() => {
         socket = io(ENDPOINT);
@@ -24,8 +25,8 @@ function Drawing() {
     
     const onResize = () => {
         const canvas = refCanvas.current;
-        canvas.width = document.documentElement.clientWidth - 8;
-        canvas.height = document.documentElement.clientHeight / 1.3;
+        canvas.width = window.innerWidth - 25;
+        canvas.height = window.innerHeight - 150;
       };
 
     const clickPen = () => {
@@ -46,11 +47,8 @@ function Drawing() {
         
         const canvas = refCanvas.current;
 
-        canvas.width = document.documentElement.clientWidth - 8;
-        canvas.height = document.documentElement.clientHeight / 1.3;
-
-        console.log(canvas.height)
-
+        canvas.width =  window.innerWidth - 8;
+        canvas.height = window.innerHeight - 150;
 
         window.addEventListener("resize", onResize);
 
@@ -61,13 +59,13 @@ function Drawing() {
         refContext.current = context;
    
         socket.on('drawio', data => {
-            let w = window.innerWidth - 8;
-            let h = window.innerHeight / 1.3;
+            let w = canvas.width;
+            let h = canvas.height;
             drawNow(data.x0 * w, data.y0 * h, data.x1 * w, data.y1 * h, data.color, data.size, false);
         });
 
         socket.on('clean', () => {
-            refContext.current.clearRect(0, 0, window.innerWidth - 8, window.innerHeight / 1.3)
+            refContext.current.clearRect(0, 0, canvas.width, canvas.height)
         });
     }, [])
 
@@ -104,8 +102,8 @@ function Drawing() {
         refContext.current.closePath();
 
         //Ah chaque dessin, envoie des infos a "drawio"
-        var w = window.innerWidth - 8;
-        var h = window.innerHeight / 1.3;
+        var w = refContext.current.canvas.width;
+        var h = refContext.current.canvas.height;
         //seulement si c'est un dessin et pas un retour d'info pour socket
         if (!emit)
             return

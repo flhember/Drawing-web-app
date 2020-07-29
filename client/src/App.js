@@ -7,7 +7,7 @@ import {BrowserRouter as Router, Route } from 'react-router-dom';
 const App = () => (
   <Router>
       <div className= 'App'>
-        <h1>Drawing Web App</h1>
+        <p>Drawing Web App</p>
       </div>
       <Route path="/" exact component={Drawing} />
   </Router>
